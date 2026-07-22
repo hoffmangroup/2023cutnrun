@@ -1,0 +1,66 @@
+{
+  "treatment": "",
+  "control": "",
+
+  "raw_dir": "",
+  "output_dir": "",
+  "temp_dir": "",
+  "log_dir": "",
+  "qc_dir": "",
+  "fastqc_dir": "",
+  "multiqc_dir": "",
+  "fastp_out_dir": "",
+  "bam_dir": "",
+  "bed_dir": "",
+  "bdg_dir": "",
+  "macs_dir": "",
+  "seacr_dir": "",
+
+  "threads": 1,
+
+  "fastp_param": "-V -p -z 9 --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --adapter_sequence_r2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT",
+
+  "bowtie2_main_param": "-D 20 -R 6 -N 1 -L 18 -i S,1,0.25 --phred33 --no-unal --no-discordant --no-mixed -I 10 -X 700",
+  "bowtie2_spike_in_param": "-D 20 -R 6 -N 1 -L 18 -i S,1,0.25 --phred33 --no-unal --no-discordant --no-mixed -I 10 -X 700 --no-overlap --no-dovetail",
+  "bowtie2_index_main": "",
+  "bowtie2_index_spike_in": "",
+
+  "genome_main": "",
+  "genome_size": "",
+  "chr_len_file": "",
+  "qualimap_assembly": "hg19",
+
+  "filter": true,
+  "max_frag_len": "120",
+  "min_frag_len": "1",
+  "filter_option": "max",
+
+  "spkin": true,
+  "spike_in_script": "scripts/spike_in_calibration_new.csh",
+  "spike_in_min_len": "1",
+  "spike_in_max_len": "1000",
+  "scale": "10000",
+
+  "peak_caller": "all",
+
+  "macs_version": "macs2",
+  "macs_fdr": "0.05",
+  "min_peak_length": "40",
+  "macs_callpeak": false,
+  "cutoff": false,
+
+  "seacr_script": "SEACR_1.3.sh",
+  "seacr_mode": "stringent",
+
+  "motif": true,
+  "jaspar": "JASPAR2020_CORE_vertebrates_non-redundant_pfms_meme.txt",
+  "peak_location": "summit",
+  "fasta_ext_len": "250",
+  "skip_dreme": true,
+
+  "flagstat": true,
+  "fastqc": true,
+  "qc": true,
+  "manual": false,
+  "multiqc_config": "multiqc_config.yaml"
+}

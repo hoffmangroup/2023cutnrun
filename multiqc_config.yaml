@@ -1,0 +1,48 @@
+report_header_info:
+  - Application Type: 'CUT&RUN'
+  - Project Type: 'TF binding assessment'
+  - Sequencing Platform: ''
+  - Sequencing Setup: ''
+  - Preprocessing: 'fastp 0.21.0'
+
+sample_names_rename_buttons:
+    - "Stored Names"
+    - "Display Names"
+
+sample_names_rename:
+    - ["CEBPB", "C/EBPβ"]
+
+sp:
+  bowtie2_module:
+    fn: bowtie2_log-manually_annotated.txt
+  macs2:
+    fn: '*_peaks.xls'
+
+
+# do not include replicate-merged MACS runs, but only those per rep.
+sample_names_ignore_re:
+      - '[A-Za-z]+\d*-IgG(_peaks)?'
+
+
+extra_fn_clean_exts:
+  # only use the TF name and replicate number; all other naming is extraneous
+  # N.B. this is highly specific to the current naming scheme
+  #
+  # cannot use `type: regex_keep`, since we need to patch portions at the start and end
+  - type: regex
+    pattern: '[-_]\d{2,}(_S\d+)?(-Homo_sapiens.GRCh38(_stats)?|-\w+-trim[a-z]*)?'
+
+  - type: regex  # remove "-IgG" suffixes, used by MACS' file names
+    pattern: '(?<=-[12])-IgG(-[12])?'
+
+  - type: regex  # remove "R" portion of PE specifier, to merge with those named wthout it
+    pattern: '(?<=[_-])R(?=[12])'
+
+
+sp:
+  # use a manual file, adding in the command before each set of logs, to improve filename inference
+  bowtie2_module:
+    fn: bowtie2_log-manually_annotated.txt
+
+picard_config:
+  insertsize_smooth_points: 999999999999
